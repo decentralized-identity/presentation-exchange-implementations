@@ -1,0 +1,59 @@
+package submission
+
+import (
+	"testing"
+
+	"github.com/stretchr/testify/assert"
+
+	"go.wday.io/credentials-open-source/presentation-exchange/pkg/definition"
+	"go.wday.io/credentials-open-source/presentation-exchange/pkg/submission/verifiablepresentation/testcases"
+	"go.wday.io/credentials-open-source/presentation-exchange/pkg/util"
+)
+
+// https://identity.foundation/presentation-exchange/#presentation-submission---verifiable-presentation
+func TestPresentationSubmissionBuilder(t *testing.T) {
+	b := NewPresentationSubmissionBuilder()
+
+	// shouldn't validate as empty
+	_, err := b.Build()
+	assert.Error(t, err)
+	assert.Contains(t, err.Error(), "Field validation for 'DescriptorMap' failed on the 'required' tag")
+
+	// Add descriptors
+	err = b.AddDescriptor(Descriptor{
+		ID:     "banking_input_2",
+		Format: definition.CredentialFormat(definition.JWTVC),
+		Path:   "$.verifiableCredential.[0]",
+	})
+	assert.NoError(t, err)
+
+	err = b.AddDescriptor(Descriptor{
+		ID:     "employment_input",
+		Format: definition.CredentialFormat(definition.LDPVC),
+		Path:   "$.verifiableCredential.[1]",
+	})
+	assert.NoError(t, err)
+
+	err = b.AddDescriptor(Descriptor{
+		ID:     "citizenship_input_1",
+		Format: definition.CredentialFormat(definition.LDPVC),
+		Path:   "$.verifiableCredential.[2]",
+	})
+	assert.NoError(t, err)
+
+	presSub, err := b.Build()
+	assert.NoError(t, err)
+	assert.NoError(t, util.Validate(presSub))
+
+	presSubJSON, err := util.ToJSON(presSub)
+	assert.NoError(t, err)
+
+	// get sample json from packr
+	testPresSubJSON, err := testcases.GetJSONFile(testcases.SampleSubmission)
+	assert.NoError(t, err)
+
+	// Make sure our builder has the same result
+	same, err := util.CompareJSON(presSubJSON, testPresSubJSON)
+	assert.NoError(t, err)
+	assert.True(t, same)
+}

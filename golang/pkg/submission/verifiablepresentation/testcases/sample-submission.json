@@ -1,0 +1,21 @@
+{
+  "presentation_submission": {
+    "descriptor_map": [
+      {
+        "id": "banking_input_2",
+        "format": "jwt_vc",
+        "path": "$.verifiableCredential.[0]"
+      },
+      {
+        "id": "employment_input",
+        "format": "ldp_vc",
+        "path": "$.verifiableCredential.[1]"
+      },
+      {
+        "id": "citizenship_input_1",
+        "format": "ldp_vc",
+        "path": "$.verifiableCredential.[2]"
+      }
+    ]
+  }
+}
