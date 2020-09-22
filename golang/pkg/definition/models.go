@@ -1,9 +1,14 @@
 package definition
 
 type (
+	Selection        string
+	Preference       string
 	CredentialFormat string
 	JWTFormat        CredentialFormat
 	LDPFormat        CredentialFormat
+
+	StringOrInteger interface{}
+	JSONObject      interface{}
 )
 
 const (
@@ -14,6 +19,12 @@ const (
 	LDP   LDPFormat = "ldp"
 	LDPVC LDPFormat = "ldp_vc"
 	LDPVP LDPFormat = "ldp_vp"
+
+	All  Selection = "all"
+	Pick Selection = "pick"
+
+	Required  Preference = "required"
+	Preferred Preference = "preferred"
 )
 
 type PresentationDefinitionHolder struct {
@@ -48,12 +59,12 @@ type LDPType struct {
 }
 
 type SubmissionRequirement struct {
-	Name    string `json:"name,omitempty"`
-	Purpose string `json:"purpose,omitempty"`
-	Rule    string `json:"rule" validate:"required"`
-	Count   int    `json:"count,omitempty" validate:"min=1"`
-	Minimum int    `json:"min,omitempty"`
-	Maximum int    `json:"max,omitempty"`
+	Name    string    `json:"name,omitempty"`
+	Purpose string    `json:"purpose,omitempty"`
+	Rule    Selection `json:"rule" validate:"required"`
+	Count   int       `json:"count,omitempty" validate:"min=1"`
+	Minimum int       `json:"min,omitempty"`
+	Maximum int       `json:"max,omitempty"`
 
 	// Either an array of SubmissionRequirement or a string value
 	FromOption `validate:"required"`
@@ -79,21 +90,30 @@ type Schema struct {
 }
 
 type Constraints struct {
-	LimitDisclosure bool    `json:"limit_disclosure,omitempty"`
-	Fields          []Field `json:"fields,omitempty"`
+	LimitDisclosure bool        `json:"limit_disclosure,omitempty"`
+	Fields          []Field     `json:"fields,omitempty"`
+	SubjectIsIssuer *Preference `json:"subject_is_issuer,omitempty"`
+	SubjectIsHolder *Preference `json:"subject_is_holder,omitempty"`
 }
 
 type Field struct {
-	Path    []string `json:"path,omitempty" validate:"required"`
-	Purpose string   `json:"purpose,omitempty"`
-	Filter  *Filter  `json:"filter,omitempty"`
+	Path      []string    `json:"path,omitempty" validate:"required"`
+	Purpose   string      `json:"purpose,omitempty"`
+	Filter    *Filter     `json:"filter,omitempty"`
+	Predicate *Preference `json:"predicate,omitempty"`
 }
 
 type Filter struct {
-	Type      string `json:"type" validate:"required"`
-	Format    string `json:"format,omitempty"`
-	Pattern   string `json:"pattern,omitempty"`
-	Minimum   string `json:"minimum,omitempty"`
-	MinLength int    `json:"minLength,omitempty"`
-	MaxLength int    `json:"maxLength,omitempty"`
+	Type             string            `json:"type" validate:"required"`
+	Format           string            `json:"format,omitempty"`
+	Pattern          string            `json:"pattern,omitempty"`
+	Minimum          StringOrInteger   `json:"minimum,omitempty"`
+	Maximum          StringOrInteger   `json:"maximum,omitempty"`
+	MinLength        int               `json:"minLength,omitempty"`
+	MaxLength        int               `json:"maxLength,omitempty"`
+	ExclusiveMinimum StringOrInteger   `json:"exclusiveMinimum,omitempty"`
+	ExclusiveMaximum StringOrInteger   `json:"exclusiveMaximum,omitempty"`
+	Const            StringOrInteger   `json:"const,omitempty"`
+	Enum             []StringOrInteger `json:"enum,omitempty"`
+	Not              JSONObject        `json:"not,omitempty"`
 }

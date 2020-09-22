@@ -120,6 +120,11 @@ func (i *InputDescriptor) SetSchema(s Schema) error {
 }
 
 func (i *InputDescriptor) SetConstraints(fields ...Field) error {
+	for _, f := range fields {
+		if f.Predicate != nil && f.Filter == nil {
+			return fmt.Errorf("field cannot have a predicate preference without a filter: %+v", f)
+		}
+	}
 	if i.Constraints == nil {
 		i.Constraints = &Constraints{
 			Fields: fields,
@@ -128,6 +133,22 @@ func (i *InputDescriptor) SetConstraints(fields ...Field) error {
 		i.Constraints.Fields = fields
 	}
 	return util.Validate(i.Constraints)
+}
+
+func (i *InputDescriptor) SetSubjectIsIssuer(preference Preference) error {
+	if i.Constraints == nil {
+		i.Constraints = &Constraints{}
+	}
+	i.Constraints.SubjectIsIssuer = &preference
+	return nil
+}
+
+func (i *InputDescriptor) SetSubjectIsHolder(preference Preference) error {
+	if i.Constraints == nil {
+		i.Constraints = &Constraints{}
+	}
+	i.Constraints.SubjectIsHolder = &preference
+	return nil
 }
 
 func (i *InputDescriptor) SetConstraintsLimitDisclosure(limitDisclosure bool) {
