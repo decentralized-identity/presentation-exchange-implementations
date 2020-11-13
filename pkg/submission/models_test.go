@@ -6,9 +6,9 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"go.wday.io/credentials-open-source/presentation-exchange/internal/schema"
-	"go.wday.io/credentials-open-source/presentation-exchange/pkg/submission/verifiablepresentation/testcases"
-	"go.wday.io/credentials-open-source/presentation-exchange/pkg/util"
+	"github.com/decentralized-identity/presentation-exchange-implementations/internal/schema"
+	"github.com/decentralized-identity/presentation-exchange-implementations/pkg/submission/verifiablepresentation/testcases"
+	"github.com/decentralized-identity/presentation-exchange-implementations/pkg/util"
 )
 
 func TestPresentationSubmission(t *testing.T) {

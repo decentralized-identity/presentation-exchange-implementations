@@ -1,7 +1,7 @@
 package submission
 
 import (
-	"go.wday.io/credentials-open-source/presentation-exchange/pkg/definition"
+	"github.com/decentralized-identity/presentation-exchange-implementations/pkg/definition"
 )
 
 type PresentationSubmissionHolder struct {

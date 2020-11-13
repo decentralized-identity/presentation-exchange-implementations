@@ -1,7 +1,7 @@
 package verifiablepresentation
 
 import (
-	"go.wday.io/credentials-open-source/presentation-exchange/pkg/submission"
+	"github.com/decentralized-identity/presentation-exchange-implementations/pkg/submission"
 )
 
 type VerifiablePresentation struct {

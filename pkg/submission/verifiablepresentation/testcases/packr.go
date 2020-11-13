@@ -3,7 +3,7 @@ package testcases
 import (
 	"github.com/gobuffalo/packr"
 
-	"go.wday.io/credentials-open-source/presentation-exchange/pkg/util"
+	"github.com/decentralized-identity/presentation-exchange-implementations/pkg/util"
 )
 
 var box = packr.NewBox(".")

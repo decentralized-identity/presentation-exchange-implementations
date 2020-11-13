@@ -5,8 +5,8 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"go.wday.io/credentials-open-source/presentation-exchange/pkg/definition/testcases"
-	"go.wday.io/credentials-open-source/presentation-exchange/pkg/util"
+	"github.com/decentralized-identity/presentation-exchange-implementations/pkg/definition/testcases"
+	"github.com/decentralized-identity/presentation-exchange-implementations/pkg/util"
 )
 
 // https://identity.foundation/presentation-exchange/#presentation-definition---basic-example
