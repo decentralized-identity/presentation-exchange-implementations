@@ -78,10 +78,12 @@ func TestPresentationDefinitionBuilder(t *testing.T) {
 		// minimally complaint pres def
 		b := NewPresentationDefinitionBuilder()
 		err := b.AddInputDescriptor(InputDescriptor{
-			ID:          "test",
-			Schema:      &Schema{
-				URI:      []string{"test"},
-				Name:     "test",
+			ID:   "test",
+			Name: "test",
+			Schema: []Schema{
+				{
+					URI: "test",
+				},
 			},
 		})
 		assert.NoError(t, err)
@@ -97,10 +99,12 @@ func TestPresentationDefinitionBuilder(t *testing.T) {
 		// minimally complaint pres def
 		b := NewPresentationDefinitionBuilder()
 		err := b.AddInputDescriptor(InputDescriptor{
-			ID:          "test",
-			Schema:      &Schema{
-				URI:      []string{"test"},
-				Name:     "test",
+			ID:   "test",
+			Name: "test",
+			Schema: []Schema{
+				{
+					URI: "test",
+				},
 			},
 		})
 		assert.NoError(t, err)
@@ -116,10 +120,12 @@ func TestPresentationDefinitionBuilder(t *testing.T) {
 		// minimally complaint pres def
 		b := NewPresentationDefinitionBuilder()
 		err := b.AddInputDescriptor(InputDescriptor{
-			ID:          "test",
-			Schema:      &Schema{
-				URI:      []string{"test"},
-				Name:     "test",
+			ID:   "test",
+			Name: "test",
+			Schema: []Schema{
+				{
+					URI: "test",
+				},
 			},
 		})
 		assert.NoError(t, err)
@@ -139,10 +145,12 @@ func TestPresentationDefinitionBuilder(t *testing.T) {
 		// minimally complaint pres def
 		b := NewPresentationDefinitionBuilder()
 		err := b.AddInputDescriptor(InputDescriptor{
-			ID:          "test",
-			Schema:      &Schema{
-				URI:      []string{"test"},
-				Name:     "test",
+			ID:   "test",
+			Name: "test",
+			Schema: []Schema{
+				{
+					URI: "test",
+				},
 			},
 		})
 		assert.NoError(t, err)

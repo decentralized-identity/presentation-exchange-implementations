@@ -24,16 +24,16 @@
     "input_descriptors": [
       {
         "id": "banking_input_1",
+        "name": "Bank Account Information",
+        "purpose": "We need your bank and account information.",
         "group": [
           "A"
         ],
-        "schema": {
-          "uri": [
-            "https://bank-standards.com/customer.json"
-          ],
-          "name": "Bank Account Information",
-          "purpose": "We need your bank and account information."
-        },
+        "schema": [
+          {
+            "uri": "https://bank-standards.com/customer.json"
+          }
+        ],
         "constraints": {
           "limit_disclosure": true,
           "fields": [
@@ -43,7 +43,7 @@
                 "$.vc.issuer",
                 "$.iss"
               ],
-              "purpose": "The credential must be from one of the specified issuers",
+              "purpose": "The claim must be from one of the specified issuers",
               "filter": {
                 "type": "string",
                 "pattern": "did:example:123|did:example:456"
@@ -79,17 +79,19 @@
       },
       {
         "id": "banking_input_2",
+        "name": "Bank Account Information",
+        "purpose": "We need your bank and account information.",
         "group": [
           "A"
         ],
-        "schema": {
-          "uri": [
-            "https://bank-schemas.org/1.0.0/accounts.json",
-            "https://bank-schemas.org/2.0.0/accounts.json"
-          ],
-          "name": "Bank Account Information",
-          "purpose": "We need your bank and account information."
-        },
+        "schema": [
+          {
+            "uri": "https://bank-schemas.org/1.0.0/accounts.json"
+          },
+          {
+            "uri": "https://bank-schemas.org/2.0.0/accounts.json"
+          }
+        ],
         "constraints": {
           "fields": [
             {
@@ -98,7 +100,7 @@
                 "$.vc.issuer",
                 "$.iss"
               ],
-              "purpose": "The credential must be from one of the specified issuers",
+              "purpose": "The claim must be from one of the specified issuers",
               "filter": {
                 "type": "string",
                 "pattern": "did:example:123|did:example:456"
@@ -134,16 +136,16 @@
       },
       {
         "id": "employment_input",
+        "name": "Employment History",
+        "purpose": "We need to know your work history.",
         "group": [
           "B"
         ],
-        "schema": {
-          "uri": [
-            "https://business-standards.org/schemas/employment-history.json"
-          ],
-          "name": "Employment History",
-          "purpose": "We need to know your work history."
-        },
+        "schema": [
+          {
+            "uri": "https://business-standards.org/schemas/employment-history.json"
+          }
+        ],
         "constraints": {
           "fields": [
             {
@@ -160,15 +162,15 @@
       },
       {
         "id": "citizenship_input_1",
+        "name": "EU Driver's License",
         "group": [
           "C"
         ],
-        "schema": {
-          "uri": [
-            "https://eu.com/claims/DriversLicense.json"
-          ],
-          "name": "EU Driver's License"
-        },
+        "schema": [
+          {
+            "uri": "https://eu.com/claims/DriversLicense.json"
+          }
+        ],
         "constraints": {
           "fields": [
             {
@@ -177,7 +179,7 @@
                 "$.vc.issuer",
                 "$.iss"
               ],
-              "purpose": "The credential must be from one of the specified issuers",
+              "purpose": "The claim must be from one of the specified issuers",
               "filter": {
                 "type": "string",
                 "pattern": "did:example:gov1|did:example:gov2"
@@ -190,7 +192,8 @@
                 "$.dob"
               ],
               "filter": {
-                "type": "date",
+                "type": "string",
+                "format": "date",
                 "minimum": "1999-5-16"
               }
             }
@@ -199,15 +202,15 @@
       },
       {
         "id": "citizenship_input_2",
+        "name": "US Passport",
         "group": [
           "C"
         ],
-        "schema": {
-          "uri": [
-            "hub://did:foo:123/Collections/schema.us.gov/passport.json"
-          ],
-          "name": "US Passport"
-        },
+        "schema": [
+          {
+            "uri": "hub://did:foo:123/Collections/schema.us.gov/passport.json"
+          }
+        ],
         "constraints": {
           "fields": [
             {
@@ -217,7 +220,8 @@
                 "$.birth_date"
               ],
               "filter": {
-                "type": "date",
+                "type": "string",
+                "format": "date",
                 "minimum": "1999-5-16"
               }
             }

@@ -77,16 +77,17 @@ type FromOption struct {
 
 type InputDescriptor struct {
 	ID          string       `json:"id,omitempty" validate:"required"`
+	Name        string       `json:"name,omitempty"`
+	Purpose     string       `json:"purpose,omitempty"`
+	Metadata    string       `json:"metadata,omitempty"`
 	Group       []string     `json:"group,omitempty"`
-	Schema      *Schema      `json:"schema,omitempty" validate:"required"`
+	Schema      []Schema     `json:"schema,omitempty" validate:"required,min=1"`
 	Constraints *Constraints `json:"constraints,omitempty"`
 }
 
 type Schema struct {
-	URI      []string `json:"uri,omitempty" validate:"required,min=1"`
-	Name     string   `json:"name,omitempty" validate:"required"`
-	Purpose  string   `json:"purpose,omitempty"`
-	Metadata string   `json:"metadata,omitempty"`
+	URI      string `json:"uri,omitempty"`
+	Required bool   `json:"required,omitempty"`
 }
 
 type Constraints struct {

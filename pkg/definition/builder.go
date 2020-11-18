@@ -107,15 +107,20 @@ func (p *PresentationDefinitionBuilder) AddInputDescriptor(i InputDescriptor) er
 	return nil
 }
 
-func NewInputDescriptor(id string) *InputDescriptor {
-	return &InputDescriptor{ID: id}
+func NewInputDescriptor(id, name, purpose, metadata string) *InputDescriptor {
+	return &InputDescriptor{
+		ID:       id,
+		Name:     name,
+		Purpose:  purpose,
+		Metadata: metadata,
+	}
 }
 
-func (i *InputDescriptor) SetSchema(s Schema) error {
+func (i *InputDescriptor) AddSchema(s Schema) error {
 	if err := util.Validate(s); err != nil {
 		return err
 	}
-	i.Schema = &s
+	i.Schema = append(i.Schema, s)
 	return nil
 }
 
