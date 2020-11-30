@@ -6,6 +6,12 @@
     "presentation_submission": {
       "type": "object",
       "properties": {
+        "id": {
+          "type": "string"
+        },
+        "definition_id": {
+          "type": "string"
+        },
         "locale": {
           "type": "string"
         },
@@ -17,6 +23,8 @@
         }
       },
       "required": [
+        "id",
+        "definition_id",
         "descriptor_map"
       ],
       "additionalProperties": false
@@ -31,6 +39,10 @@
         },
         "path": {
           "type": "string"
+        },
+        "path_nested": {
+          "type": "object",
+          "$ref": "#/definitions/descriptor"
         },
         "format": {
           "type": "string",

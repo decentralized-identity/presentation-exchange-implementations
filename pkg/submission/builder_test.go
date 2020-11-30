@@ -12,7 +12,8 @@ import (
 
 // https://identity.foundation/presentation-exchange/#presentation-submission---verifiable-presentation
 func TestPresentationSubmissionBuilder(t *testing.T) {
-	b := NewPresentationSubmissionBuilder()
+	b := NewPresentationSubmissionBuilder("32f54163-7166-48f1-93d8-ff217bdb0653")
+	b.SetID("a30e3b91-fb77-4d22-95fa-871689c322e2")
 
 	// shouldn't validate as empty
 	_, err := b.Build()

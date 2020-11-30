@@ -12,6 +12,7 @@ import (
 // https://identity.foundation/presentation-exchange/#presentation-definition---basic-example
 func TestPresentationDefinitionBuilder_BasicExample(t *testing.T) {
 	b := NewPresentationDefinitionBuilder()
+	b.SetID("32f54163-7166-48f1-93d8-ff217bdb0653")
 
 	// shouldn't validate as empty
 	_, err := b.Build()
@@ -84,7 +85,7 @@ func TestPresentationDefinitionBuilder_BasicExample(t *testing.T) {
 	// get sample json from packr
 	testPresDefJSON, err := testcases.GetJSONFile(testcases.BasicPresentationDefinition)
 	assert.NoError(t, err)
-	
+
 	// Make sure our builder has the same result
 	same, err := util.CompareJSON(presDefJSON, testPresDefJSON)
 	assert.NoError(t, err)

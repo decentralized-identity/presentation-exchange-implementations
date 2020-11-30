@@ -1,6 +1,8 @@
 package submission
 
 import (
+	"github.com/google/uuid"
+
 	"github.com/decentralized-identity/presentation-exchange-implementations/pkg/util"
 )
 
@@ -8,9 +10,12 @@ type PresentationSubmissionBuilder struct {
 	Submission PresentationSubmission
 }
 
-func NewPresentationSubmissionBuilder() *PresentationSubmissionBuilder {
+func NewPresentationSubmissionBuilder(definitionID string) *PresentationSubmissionBuilder {
 	return &PresentationSubmissionBuilder{
-		Submission: PresentationSubmission{},
+		Submission: PresentationSubmission{
+			ID:           uuid.New().String(),
+			DefinitionID: definitionID,
+		},
 	}
 }
 
@@ -26,6 +31,14 @@ func (p *PresentationSubmissionBuilder) AddDescriptor(d Descriptor) error {
 	}
 	p.Submission.DescriptorMap = append(p.Submission.DescriptorMap, d)
 	return nil
+}
+
+func (p *PresentationSubmissionBuilder) SetID(id string) {
+	p.Submission.ID = id
+}
+
+func (p *PresentationSubmissionBuilder) SetDefinitionID(definitionID string) {
+	p.Submission.DefinitionID = definitionID
 }
 
 func (p *PresentationSubmissionBuilder) SetLocale(locale string) {

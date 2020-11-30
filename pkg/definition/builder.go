@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 
+	"github.com/google/uuid"
 	"github.com/hashicorp/go-multierror"
 
 	"github.com/decentralized-identity/presentation-exchange-implementations/pkg/util"
@@ -15,7 +16,9 @@ type PresentationDefinitionBuilder struct {
 
 func NewPresentationDefinitionBuilder() *PresentationDefinitionBuilder {
 	return &PresentationDefinitionBuilder{
-		Definition: PresentationDefinition{},
+		Definition: PresentationDefinition{
+			ID: uuid.New().String(),
+		},
 	}
 }
 
@@ -23,6 +26,18 @@ func (p *PresentationDefinitionBuilder) Build() (*PresentationDefinitionHolder, 
 	return &PresentationDefinitionHolder{
 		PresentationDefinition: p.Definition,
 	}, util.Validate(p.Definition)
+}
+
+func (p *PresentationDefinitionBuilder) SetName(name string) {
+	p.Definition.Name = name
+}
+
+func (p *PresentationDefinitionBuilder) SetID(id string) {
+	p.Definition.ID = id
+}
+
+func (p *PresentationDefinitionBuilder) SetPurpose(purpose string) {
+	p.Definition.Purpose = purpose
 }
 
 func (p *PresentationDefinitionBuilder) SetLocale(locale string) {

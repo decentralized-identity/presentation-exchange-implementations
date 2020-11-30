@@ -14,31 +14,32 @@ import (
 // https://identity.foundation/presentation-exchange/#presentation-submission---verifiable-presentation
 func TestVerifiablePresentationBuilder(t *testing.T) {
 	// First build the inner presentation submission
-	presSubBuilder := submission.NewPresentationSubmissionBuilder()
+	b := submission.NewPresentationSubmissionBuilder("32f54163-7166-48f1-93d8-ff217bdb0653")
+	b.SetID("a30e3b91-fb77-4d22-95fa-871689c322e2")
 
 	// Add descriptors
-	err := presSubBuilder.AddDescriptor(submission.Descriptor{
+	err := b.AddDescriptor(submission.Descriptor{
 		ID:     "banking_input_2",
 		Format: definition.CredentialFormat(definition.JWTVC),
 		Path:   "$.verifiableCredential.[0]",
 	})
 	assert.NoError(t, err)
 
-	err = presSubBuilder.AddDescriptor(submission.Descriptor{
+	err = b.AddDescriptor(submission.Descriptor{
 		ID:     "employment_input",
 		Format: definition.CredentialFormat(definition.LDPVC),
 		Path:   "$.verifiableCredential.[1]",
 	})
 	assert.NoError(t, err)
 
-	err = presSubBuilder.AddDescriptor(submission.Descriptor{
+	err = b.AddDescriptor(submission.Descriptor{
 		ID:     "citizenship_input_1",
 		Format: definition.CredentialFormat(definition.LDPVC),
 		Path:   "$.verifiableCredential.[2]",
 	})
 	assert.NoError(t, err)
 
-	presSub, err := presSubBuilder.Build()
+	presSub, err := b.Build()
 	assert.NoError(t, err)
 	assert.NoError(t, util.Validate(presSub))
 

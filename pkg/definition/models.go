@@ -33,6 +33,7 @@ type PresentationDefinitionHolder struct {
 
 type PresentationDefinition struct {
 	Name                   string                  `json:"name,omitempty"`
+	ID                     string                  `json:"id" validate:"required"`
 	Purpose                string                  `json:"purpose,omitempty"`
 	Locale                 string                  `json:"locale,omitempty"`
 	Format                 *Format                 `json:"format,omitempty"`

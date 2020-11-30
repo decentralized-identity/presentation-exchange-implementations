@@ -9,6 +9,8 @@ type PresentationSubmissionHolder struct {
 }
 
 type PresentationSubmission struct {
+	ID            string       `json:"id" validate:"required"`
+	DefinitionID  string       `json:"definition_id" validate:"required"`
 	Locale        string       `json:"locale,omitempty"`
 	DescriptorMap []Descriptor `json:"descriptor_map" validate:"required"`
 }

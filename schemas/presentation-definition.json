@@ -320,6 +320,9 @@
     "presentation_definition": {
       "type": "object",
       "properties": {
+        "id": {
+          "type": "string"
+        },
         "name": {
           "type": "string"
         },
@@ -346,6 +349,7 @@
         }
       },
       "required": [
+        "id",
         "input_descriptors"
       ],
       "additionalProperties": false
